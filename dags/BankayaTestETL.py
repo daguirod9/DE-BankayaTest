@@ -17,7 +17,7 @@ from extract_mongo_data import get_coll_data
 from extract_oltp_data import get_oltp_data
 # [START instantiate_dag]
 @dag(
-    schedule_interval=None,                             
+    schedule_interval= '0 0 * * *',                             
     start_date=pendulum.datetime(2023, 2, 27, tz="UTC"), 
     catchup=False,               
     tags=['BankayaTest']
