@@ -1,0 +1,74 @@
+1. What is Data Engineering?
+Data Engineering refeers to the development and management of the infrastructure, code, tools, and processes 
+needed to ingest, clean, transform, store and analyze various forms of data. 
+Data Engineering involves a variety of skills, including programming, DBA, data modeling, data pipelines desing, 
+business knowledge and distributed computing. 
+
+2. What are the main responsibilities of a Data Engineer?
+- Design, implement and mantain the data pipelines that enable the ingestion of raw data from various data sources into 
+a storage platform in order to be cleaned, transformed and loaded in a DW or DL for the consumption of other business processes 
+like analytics and data science
+- Data modeling in order to guarantee data integrity and consumption
+- Ensure data quality and governance
+- Document data pipelines processes
+
+3. Explain ETL.
+In Data pipelines, ETL refeers to Extract-Load-Transform and it is a pattern design of data pipeline in wich:
+- The extract step gathers data, in raw form, from various types of sources in preparation to be transform and loaded into a target platform
+- The transform step is where the raw data from each source system is combined, cleaned and formatted in a way the business logic
+requires for the analysts, data scientist and stakeholders
+- The load step brings either the raw data (in the case of ELT) or the fully transformed data (ETL) into the target data system, that could be 
+a Data Warehoue, Data Lake or Data LAkehouse
+
+4. How you build a Data Pipeline?
+Designing a data pipeline involves the definition of three main steps, the ingestion of data, the processing of data and the data storage that is 
+commonly orchestrate
+a) Data ingestion: is the process responsible for the raw data collection from various source systems, these sources can be APIs, Web interactions, OLTP, etc.
+Data ingestion could be perform with a many type of solutions, like Python Scripts, Bash Scripts, Apache Kafka, AWS Kinesis or third party solutions like Fivetran, etc.
+b) Data processing or transformation: Once the raw data has been collected, the next step is to process it. This could involve cleaning the data, 
+transforming it into a format that is suitable for analysis, and filtering out any data that is irrelevant to the analysis. This step can involve using tools like 
+Apache Spark, Pandas, or custom scripts.
+c) Data storage: Once the data has been processed, the next step is to store it in a Data Warehouse, Data Lake or Data Lakehouse
+This could involve setting up a cloud-based storage solution like AWS S3 + AWS LakeFormation + AWS Glue Data Catalog, or using a OLAP DW like AWS Redshift or Snowflake
+
+To put an example lets say that we want to build a data pipeline to help the Credit team to perform the Card's Line of Credit Increase of our clients. And the credit team 
+needs data about each elegible client, data about Credit reports, credit cards statements and purchases. And lets say data lives in the AWS Aurora database (OLTP) and we can \
+not perform heavy logic queries on it because it can compromise the database and platform performance. So the data pipeline could be (using only AWS services):
+- Data ingestion: We need to perform CDC or replication ongoing of the tables that holds the data we need into our Data Lake, in the bronze layer. So we can use AWS DMS service 
+in order perform the Change Data Capture that delivers data to our Data Lake bronze layer inside our S3 bucket.
+- Data processing: We also need an AWS Lambda that triggers an AWS Glue Job to perform the updates in data and apply the wrangling and transformation of data every time data is 
+updated
+- Data storage: All this data lives inside the LakeHouse managed by AWS LakeFormation and S3 where it can be queried with AWS Athena and/or AWS Redhsift Spectrum
+
+5. In a RDBMS, the Join command is your friend. Explain why.
+-Avoid data duplication: Rather than storing all the data in a single table, you can break it down into multiple tables to avoid redundancy and improve data integrity.
+-Enables complex queries: can combine multiple tables and filter the results based on various criteria
+-Improve data analysis
+-Improves database performance
+
+6. What are the main features of a production pipeline
+-Fault tolerance
+-Data quality and validation
+-Re-process logic 
+-Security
+-Scalability
+-Distributed computing
+
+7. How do you monitor a data pipeline?
+You can perform various of these methods:
+-Define metrics: Define key performance indicators (KPIs) that track the performance of your data pipeline. These metrics may include data volume, data validation, 
+processing time, or error rates.
+-Set alerts and put logs on every step: based on metrics defined, set up alerts channels to the data owners and business stakeholders that communicate if pipeline ran 
+as expected or some failure occurred. Also set logging methods on your pipelines to record and track all events that occured in the data pipeline
+-Create a visualization of the data pipeline that shows the flow of data from source to destination
+
+8. Give us a situation where you decide to use a NoSQL database instead of a relational
+database and explain why.
+A NoSQL database may be a better choice over a RDNMS in situations where the data being stored is unstructured or semi-structured, 
+just like large JSONs documents like purchased items in a shop that contains data like number of items, total transaction amount, products names, etc.
+
+
+
+
+
+
