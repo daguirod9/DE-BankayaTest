@@ -1,0 +1,12 @@
+{
+    "host-postgres": "postgres",
+    "port-postgres": 5432,
+    "user-postgres": "airflow",
+    "pss-postgres": "airflow",
+    "db-oltp": "bankayatest-oltp",
+    "db-dw": "bankayatest-dw",
+    "host-mongo": "mongodb://localhost:27017/",
+    "user-mongo": "root",
+    "pss-mongo": "example",
+    "db-mongo": "bankaya-nosql"
+}
